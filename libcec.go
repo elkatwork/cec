@@ -56,8 +56,10 @@ func cecInit(deviceName string, printLogs bool) (C.libcec_connection_t, error) {
 	var conf C.libcec_configuration
 
 	conf.clientVersion = C.uint32_t(C.LIBCEC_VERSION_CURRENT)
-
 	conf.deviceTypes.types[0] = C.CEC_DEVICE_TYPE_RECORDING_DEVICE
+	conf.iButtonReleaseDelayMs = C.uint32_t(500)
+	conf.iDoubleTapTimeoutMs = C.uint32_t(200)
+	conf.cecVersion = C.CEC_VERSION_1_4
 
 	C.setName(&conf, C.CString(deviceName))
 	if printLogs {
